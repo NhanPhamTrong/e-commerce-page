@@ -6,13 +6,15 @@
 // 1200px and up: large laptops and desktops
 
 // Colors
-$primary: rgb(121, 63, 223);
+$primary: linear-gradient(rgb(226, 94, 62), rgb(255, 155, 80));
+$primary-dark: rgb(198, 61, 47);
 $on-primary: rgb(255, 255, 255);
 
-$background: rgb(230, 230, 230);
+$background: rgb(220, 220, 220);
 $on-background: rgb(0, 0, 0);
 
 $surface: rgb(255, 255, 255);
 $on-surface: rgb(0, 0, 0);
 
-$error: rgb(235, 0, 0);
+$badge-background: rgb(235, 0, 0);
+$on-badge-background: rgb(255, 255, 255);
