@@ -1,5 +1,7 @@
+import { Header } from "../components/Header/Header"
+
 export const Layout = () => {
     return (
-        <h1>Layout</h1>
+        <Header />
     )
 }

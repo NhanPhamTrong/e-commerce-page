@@ -4,11 +4,14 @@ import { Link } from "react-router-dom"
 export const Header = ({ isLoggedIn, isMobileSize }) => {
     return (
         <header>
-            <Link to="/">
-                <div className="logo"></div>
-            </Link>
+            <div className="logo">
+                <Link to="/">
+                    NP
+                </Link>
+            </div>
             <form action="">
                 <input type="text" />
+                <button type="submit">Search</button>
             </form>
             {isLoggedIn ? (
                 <>
@@ -49,7 +52,11 @@ export const Header = ({ isLoggedIn, isMobileSize }) => {
                     )}
                 </>
             ) : (
-                <Link to="/">Log in</Link>
+                <div className="account">
+                    <button className="log-in-btn" type="button">
+                        <Link to="/log-in">Log in</Link>
+                    </button>
+                </div>
             )}
         </header>
     )

@@ -1,5 +1,11 @@
+import { Header } from "../../components/Header/Header"
+import { SortAndFilter } from "../../components/SortAndFilter/SortAndFilter"
+
 export const MainPage = () => {
     return (
-        <h1>Main Page</h1>
+        <div id="main-page">
+            <Header />
+            <SortAndFilter />
+        </div>
     )
 }

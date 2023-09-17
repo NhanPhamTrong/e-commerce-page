@@ -1,5 +1,7 @@
 export const FullCartPage = () => {
     return (
-        <h1>Full Cart Page</h1>
+        <div id="full-cart-page">
+            
+        </div>
     )
 }

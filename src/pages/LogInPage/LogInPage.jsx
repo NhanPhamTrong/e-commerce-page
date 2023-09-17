@@ -1,5 +1,10 @@
+
 export const LogInPage = () => {
     return (
-        <h1>Log In Page</h1>
+        <div id="log-in-page">
+            <div className="log-in-section">
+                <div id="log-in-button"></div>
+            </div>
+        </div>
     )
 }
