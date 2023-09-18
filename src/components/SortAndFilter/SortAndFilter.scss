@@ -1,0 +1,122 @@
+@import "../../assets/global-styles/global-styles";
+
+#sort-and-filter {
+    min-height: 3.5rem;
+    width: calc(100% - 4rem);
+    margin: 0 auto 1rem;
+    padding: 0.5rem;
+    background: $surface;
+    display: flex;
+    justify-content: space-between;    
+
+    button:hover {
+        color: $primary;
+    }
+
+    .range-price, .categories {
+        width: 45%;
+        border-right: $primary 2px solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        input {
+            width: 100%;
+            margin: 0 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.5rem 0;
+            text-align: center;
+        }
+    }
+
+    .range-price {
+        padding: 0 0.5rem;
+    }
+
+    .categories {
+        position: relative;
+
+        .chosen-option {
+            height: 100%;
+            position: relative;
+        }
+
+        ul {
+            width: calc(100% - 1rem);
+            position: absolute;
+            background: $surface;
+            bottom: 0;
+            transform: translateY(100%);
+        }
+    }
+
+    .sort-section {
+        width: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        button {
+            height: 100%;
+            width: 100%;
+        }
+
+        ul {
+            width: max-content;
+            background: $surface;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transform: translateY(100%);
+
+            li {
+                button {
+                    padding: 0.5rem 1.5rem;
+                    display: flex;
+                    justify-content: space-between;
+
+                    span {
+                        margin-left: 1rem;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #sort-and-filter {
+        .range-price, .categories, #sort-popularity, #sort-price, #sort-alphabet {
+            width: 20%;
+            border-right: $primary 2px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            button {
+                height: 100%;
+                width: 100%;
+                padding: 0.5rem 0;
+                text-align: center;
+
+                span {
+                    margin-left: 0.5rem;
+                }
+            }
+
+            button.active {
+                color: $primary;
+                font-weight: 800;
+            }
+        }
+        
+        #sort-alphabet {
+            border: none;
+        }
+    }
+}

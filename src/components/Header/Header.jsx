@@ -1,7 +1,7 @@
 import "./Header.scss"
 import { Link } from "react-router-dom"
 
-export const Header = ({ isLoggedIn, isMobileSize }) => {
+export const Header = ({ user, isMobileSize }) => {
     return (
         <header>
             <div className="logo">
@@ -9,11 +9,11 @@ export const Header = ({ isLoggedIn, isMobileSize }) => {
                     NP
                 </Link>
             </div>
-            <form action="">
+            <form id="search" action="">
                 <input type="text" />
                 <button type="submit">Search</button>
             </form>
-            {isLoggedIn ? (
+            {user.isLoggedIn ? (
                 <>
                     {isMobileSize ? (
                         <>

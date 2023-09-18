@@ -1,7 +1,9 @@
+import "./ProductListSection.scss"
+
 export const ProductListSection = ({ productList }) => {
     return (
-        <ul>
-            {productList.map((product, index) => (
+        <ul id="product-list-section">
+            {productList.list && productList.list.filter(product => product.isInPriceRange && product.isChosenCategory).map((product, index) => (
                 <li key={index}>
                     <div className="image">
                         <img src={product.image} alt={product.title} />

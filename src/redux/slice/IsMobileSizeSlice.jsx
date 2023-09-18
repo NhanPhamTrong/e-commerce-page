@@ -15,4 +15,4 @@ export const IsMobileSizeSlice = createSlice({
     }
 })
 
-export const IsMobileSizeActions = IsMobileSizeSlice.actions
+export const isMobileSizeActions = IsMobileSizeSlice.actions

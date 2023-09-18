@@ -8,6 +8,9 @@ header {
     grid-row-gap: 1rem;
     align-items: center;
     position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
 
     .logo {
         grid-column: 1;

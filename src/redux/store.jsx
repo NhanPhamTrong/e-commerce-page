@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { IsLoggedInSlice } from "./slice/IsLoggedInSlice"
+import { User } from "./slice/User"
 import { IsMobileSizeSlice } from "./slice/IsMobileSizeSlice"
-import { IsActiveSlice } from "./slice/IsActiveSlice"
+import { FilterAndSortSlice } from "./slice/FilterAndSortSlice"
+import { HeaderSlice } from "./slice/HeaderSlice"
 import { ProductListSlice } from "./slice/ProductListSlice"
 
 export const store = configureStore({
     reducer: {
-        isLoggedIn: IsLoggedInSlice.reducer,
+        user: User.reducer,
         isMobileSize: IsMobileSizeSlice.reducer,
-        isActive: IsActiveSlice.reducer,
+        filterAndSort: FilterAndSortSlice.reducer,
+        header: HeaderSlice.reducer,
         productList: ProductListSlice.reducer,
     }
 })

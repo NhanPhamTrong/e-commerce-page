@@ -1,0 +1,36 @@
+@import "../../assets/global-styles/global-styles";
+
+#product-list-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+        padding: 1rem;
+        width: 15rem;
+        margin: 0.5rem;
+        background: $surface;
+        display: flex;
+        flex-direction: column;
+
+        .image {
+            height: 15rem;
+            width: 100%;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+
+        h1 {
+            font-size: 1.25rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

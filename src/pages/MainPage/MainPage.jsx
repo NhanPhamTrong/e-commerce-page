@@ -1,11 +1,38 @@
 import { Header } from "../../components/Header/Header"
 import { SortAndFilter } from "../../components/SortAndFilter/SortAndFilter"
+import { ProductListSection } from "../../components/ProductListSection/ProductListSection"
 
-export const MainPage = () => {
+export const MainPage = ({
+        user,
+        isMobileSize,
+        filterAndSort,
+        productList,
+        FilterByRange,
+        OpenCategoryFilter,
+        GetFilter,
+        SortByPopularity,
+        OpenSortOptions,
+        SortByPrice,
+        SortByAlphabet }) => {
     return (
         <div id="main-page">
-            <Header />
-            <SortAndFilter />
+            <Header
+                user={user}
+                isMobileSize={isMobileSize} />
+            <main style={{ paddingTop: "128px" }}>
+                <SortAndFilter
+                    isMobileSize={isMobileSize}
+                    productList={productList}
+                    filterAndSort={filterAndSort}
+                    FilterByRange={FilterByRange}
+                    OpenCategoryFilter={OpenCategoryFilter}
+                    GetFilter={GetFilter}
+                    SortByPopularity={SortByPopularity}
+                    OpenSortOptions={OpenSortOptions}
+                    SortByPrice={SortByPrice}
+                    SortByAlphabet={SortByAlphabet} />
+                <ProductListSection productList={productList} />
+            </main>
         </div>
     )
 }

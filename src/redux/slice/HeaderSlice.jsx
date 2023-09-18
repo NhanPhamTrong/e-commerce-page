@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-export const IsActiveSlice = createSlice({
-    name: "is active",
+export const HeaderSlice = createSlice({
+    name: "header",
     initialState: {
         cartSection: false,
         accountSection: false
@@ -22,4 +22,4 @@ export const IsActiveSlice = createSlice({
     }
 })
 
-export const IsActiveActions = IsActiveSlice.actions
+export const headerAction = HeaderSlice.actions
