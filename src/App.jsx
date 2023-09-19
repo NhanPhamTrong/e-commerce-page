@@ -38,6 +38,10 @@ export const App = () => {
         return () => window.removeEventListener('resize', handleWindowResize)
     })
 
+    const HandleSignOut = () => {
+        dispatch(userActions.LogOut())
+    }
+
     const HandleChangePriceRange = (e) => {
         dispatch(filterAndSortActions.HandleChangePriceRange({
             inputName: e.target.name,
@@ -105,6 +109,7 @@ export const App = () => {
                     isMobileSize={isMobileSize}
                     filterAndSort={filterAndSort}
                     productList={productList}
+                    HandleSignOut={HandleSignOut}
                     HandleChangePriceRange={HandleChangePriceRange}
                     OpenCategoryFilter={OpenCategoryFilter}
                     GetFilter={GetFilter}
@@ -112,7 +117,7 @@ export const App = () => {
                     OpenSortOptions={OpenSortOptions}
                     SortByPrice={SortByPrice}
                     SortByAlphabet={SortByAlphabet} />} />
-                <Route path="login" element={<LogInPage
+                <Route path="log-in" element={<LogInPage
                     HandleCallbackResponse={HandleCallbackResponse} />} />
                 <Route path="full-cart" element={<FullCartPage />} />
                 <Route path="*" element={<ProductPage />} />

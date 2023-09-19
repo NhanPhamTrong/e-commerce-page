@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 
-export const LogInPage = ({HandleCallbackResponse}) => {
+export const LogInPage = ({ HandleCallbackResponse }) => {
     useEffect(() => {
         /* global google */
         google.accounts.id.initialize({
@@ -10,6 +10,7 @@ export const LogInPage = ({HandleCallbackResponse}) => {
         })
 
         google.accounts.id.renderButton(
+            document.getElementById("sign-in-div"),
             {
                 theme: "outline",
                 size: "large"
@@ -20,7 +21,9 @@ export const LogInPage = ({HandleCallbackResponse}) => {
     return (
         <div id="log-in-page">
             <div className="log-in-section">
-                <div id="log-in-button"></div>
+                <div id="log-in-button">
+                    <div id="sign-in-div"></div>
+                </div>
             </div>
             <Link to="/"> Go back to home page</Link>
         </div>

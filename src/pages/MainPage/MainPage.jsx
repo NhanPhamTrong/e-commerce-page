@@ -7,6 +7,7 @@ export const MainPage = ({
         isMobileSize,
         filterAndSort,
         productList,
+        HandleSignOut,
         HandleChangePriceRange,
         FilterByRange,
         OpenCategoryFilter,

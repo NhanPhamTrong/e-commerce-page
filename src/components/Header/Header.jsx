@@ -1,7 +1,7 @@
 import "./Header.scss"
 import { Link } from "react-router-dom"
 
-export const Header = ({ user, isMobileSize }) => {
+export const Header = ({ user, isMobileSize, HandleSignOut }) => {
     return (
         <header>
             <div className="logo">
@@ -45,7 +45,9 @@ export const Header = ({ user, isMobileSize }) => {
                             <div className="account">
                                 <button className="avatar"></button>
                                 <ul>
-                                    <li>Log out</li>
+                                    <li>
+                                        <button type="button" onClick={HandleSignOut}>Log out</button>
+                                    </li>
                                 </ul>
                             </div>
                         </>
@@ -53,9 +55,7 @@ export const Header = ({ user, isMobileSize }) => {
                 </>
             ) : (
                 <div className="account">
-                    <button className="log-in-btn" type="button">
-                        <Link to="/log-in">Log in</Link>
-                    </button>
+                    <Link className="log-in-btn" to="/log-in">Log in</Link>
                 </div>
             )}
         </header>
