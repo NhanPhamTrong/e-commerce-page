@@ -7,6 +7,7 @@ export const SortAndFilter = ({
         isMobileSize,
         filterAndSort,
         productList,
+        HandleChangePriceRange,
         FilterByRange,
         OpenCategoryFilter,
         GetFilter,
@@ -15,7 +16,6 @@ export const SortAndFilter = ({
         SortByPrice,
         SortByAlphabet }) => {
     const dispatch = useDispatch()
-    const maxPrice = productList.list && Math.max(...productList.list.map(product => product.price))
     const categoryList = []
     productList.list && productList.list.map(product => product.category).forEach(category => {
         if (!categoryList.includes(category)) {
@@ -25,14 +25,12 @@ export const SortAndFilter = ({
 
     const HandleClickOutside = (e) => {
         if (e.target.nodeName !== "HTML") {
-            if (!e.target.classList.contains("chosen-option") && e.target.closest("div").classList.contains("categories") === false) {
-                dispatch(filterAndSortActions.CloseCategoryFilter())
-            }
-        }
-
-        if (e.target.nodeName !== "HTML") {
             if (!e.target.classList.contains("sort-btn") && e.target.closest("div").classList.contains("sort-section") === false) {
                 dispatch(filterAndSortActions.CloseSortOption())
+            }
+
+            if (!e.target.classList.contains("chosen-option") && e.target.closest("div").classList.contains("categories") === false) {
+                dispatch(filterAndSortActions.CloseCategoryFilter())
             }
         }
     }
@@ -46,16 +44,14 @@ export const SortAndFilter = ({
 
     return (
         <div id="sort-and-filter">
-            {/* price range */}
-            <div className="range-price">
-                {maxPrice > 0 && (
+            <form className="price-range">    
+                {productList.list && (
                     <>
-                        <p>0</p>
-                        <input type="range" min="0" max={Math.ceil(maxPrice / 100) * 100} defaultValue={maxPrice} onChange={FilterByRange} />
-                        <p>{Math.ceil(maxPrice / 100) * 100}</p>
+                        <input type="number" value={filterAndSort.priceRange.lowest} name="lowest" onChange={HandleChangePriceRange} />
+                        <input type="number" value={filterAndSort.priceRange.highest} name="highest" onChange={HandleChangePriceRange} />
                     </>
                 )}
-            </div>
+            </form>
             
             {/* categories */}
             <div className="categories">
@@ -90,35 +86,22 @@ export const SortAndFilter = ({
                         {filterAndSort.isActiveSortOptions && (
                             <ul>
                                 <li>
-                                    <button type="button">
-                                        Not sort
-                                    </button>
-                                </li>
-                                <li>
                                     <button type="button" onClick={SortByPopularity}>Popularity</button>
                                 </li>
                                 <li>
-                                    <button type="button" onClick={SortByPrice}>
+                                    <button className={filterAndSort.priceSort.isActive ? "active" : ""} type="button" onClick={SortByPrice}>
                                         Price
-                                        <span><i className="fa-solid fa-arrow-up"></i></span>
+                                        {filterAndSort.priceSort.isActive && (
+                                            <span><i className={"fa-solid fa-arrow-" + (filterAndSort.priceSort.isAscending ? "up" : "down")}></i></span>
+                                        )}
                                     </button>
                                 </li>
                                 <li>
-                                    <button type="button" onClick={SortByPrice}>
-                                        Price
-                                        <span><i className="fa-solid fa-arrow-down"></i></span>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="button" onClick={SortByAlphabet}>
+                                    <button className={filterAndSort.alphabetSort.isActive ? "active" : ""} type="button" onClick={SortByAlphabet}>
                                         Alphabet
-                                        <span><i className="fa-solid fa-arrow-up"></i></span>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="button" onClick={SortByAlphabet}>
-                                        Alphabet
-                                        <span><i className="fa-solid fa-arrow-down"></i></span>
+                                        {filterAndSort.alphabetSort.isActive && (
+                                            <span><i className={"fa-solid fa-arrow-" + (filterAndSort.alphabetSort.isAscending ? "up" : "down")}></i></span>
+                                        )}
                                     </button>
                                 </li>
                             </ul>

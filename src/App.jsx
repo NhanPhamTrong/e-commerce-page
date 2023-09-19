@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useEffect } from "react"
+import jwt_decode from "jwt-decode"
 import { useDispatch, useSelector } from "react-redux"
 import { FullCartPage } from "./pages/FullCartPage/FullCartPage"
 import { LogInPage } from "./pages/LogInPage/LogInPage"
@@ -8,6 +9,7 @@ import { ProductPage } from "./pages/ProductPage/ProductPage"
 import { fetchProductList, productListSliceActions } from "./redux/slice/ProductListSlice"
 import { isMobileSizeActions } from "./redux/slice/IsMobileSizeSlice"
 import { filterAndSortActions } from "./redux/slice/FilterAndSortSlice"
+import { userActions } from "./redux/slice/UserSlice"
 
 export const App = () => {
     const dispatch = useDispatch()
@@ -21,24 +23,32 @@ export const App = () => {
         dispatch(fetchProductList())
     }, [dispatch])
 
-    const handleWindowResize = () => {
-        if (window.innerWidth > 768) {
-            dispatch(isMobileSizeActions.GetBiggerSize())
-        }
-        else {
-            dispatch(isMobileSizeActions.GetMobileSize())
-        }
-    }
-
     useEffect(() => {
+        const handleWindowResize = () => {
+            if (window.innerWidth > 768) {
+                dispatch(isMobileSizeActions.GetBiggerSize())
+            }
+            else {
+                dispatch(isMobileSizeActions.GetMobileSize())
+            }
+        }
+        
         handleWindowResize()
         window.addEventListener('resize', handleWindowResize)
         return () => window.removeEventListener('resize', handleWindowResize)
     })
 
-    const FilterByRange = (e) => {
+    const HandleChangePriceRange = (e) => {
+        dispatch(filterAndSortActions.HandleChangePriceRange({
+            inputName: e.target.name,
+            value: e.target.value,
+            filterAndSort: filterAndSort
+        }))
         dispatch(productListSliceActions.FilterByRange({
-            value: e.currentTarget.value,
+            value: {
+                ...filterAndSort.priceRange,
+                [e.target.name]: e.target.value
+            },
             currentList: productList.list
         }))
     }
@@ -83,6 +93,10 @@ export const App = () => {
         }))
     }
 
+    const HandleCallbackResponse = (response) => {
+        dispatch(userActions.LogIn(jwt_decode(response.credential)))
+    }
+
     return (
         <BrowserRouter>
             <Routes>
@@ -91,14 +105,15 @@ export const App = () => {
                     isMobileSize={isMobileSize}
                     filterAndSort={filterAndSort}
                     productList={productList}
-                    FilterByRange={FilterByRange}
+                    HandleChangePriceRange={HandleChangePriceRange}
                     OpenCategoryFilter={OpenCategoryFilter}
                     GetFilter={GetFilter}
                     SortByPopularity={SortByPopularity}
                     OpenSortOptions={OpenSortOptions}
                     SortByPrice={SortByPrice}
                     SortByAlphabet={SortByAlphabet} />} />
-                <Route path="login" element={<LogInPage />} />
+                <Route path="login" element={<LogInPage
+                    HandleCallbackResponse={HandleCallbackResponse} />} />
                 <Route path="full-cart" element={<FullCartPage />} />
                 <Route path="*" element={<ProductPage />} />
             </Routes>

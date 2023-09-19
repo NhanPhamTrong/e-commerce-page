@@ -13,7 +13,7 @@ export const ProductListSlice = createSlice({
         list: []
     },
     extraReducers: builder => {
-        builder.addCase(fetchProductList.pending, (state, action) => {
+        builder.addCase(fetchProductList.pending, (state) => {
             state.isLoading = true
         })
         builder.addCase(fetchProductList.fulfilled, (state, action) => {
@@ -35,7 +35,10 @@ export const ProductListSlice = createSlice({
     },
     reducers: {
         FilterByRange(state, action) {
-            state.list = action.payload.currentList.map(product => ({ ...product, isInPriceRange: product.price < action.payload.value }))
+            state.list = action.payload.currentList.map(product => ({
+                ...product,
+                isInPriceRange: product.price <= action.payload.value.highest && product.price >= action.payload.value.lowest
+            }))
         },
         FilterByCategory(state, action) {
             state.list = action.payload.currentList.map(product => {

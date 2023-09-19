@@ -49,6 +49,7 @@ header {
         justify-content: right;
 
         .log-in-btn {
+            width: max-content;
             padding: 0.5rem 1.5rem;
             background: $on-primary;
             border-radius: 0.25rem;
@@ -60,7 +61,25 @@ header {
         }
 
         ul {
+            
+        }
+    }
+}
 
+@media only screen and (min-width: 768px) {
+    header {
+        padding: 1rem 4rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        
+        form {
+            width: 100%;
+            margin: 0 1rem;
         }
     }
 }

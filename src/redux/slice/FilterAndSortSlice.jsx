@@ -8,6 +8,10 @@ const removeSort = {
 export const FilterAndSortSlice = createSlice({
     name: "filter and sort",
     initialState: {
+        priceRange: {
+            lowest: "",
+            highest: ""
+        },
         filter: {
             isActive: false,
             name: "All"
@@ -24,6 +28,12 @@ export const FilterAndSortSlice = createSlice({
         }
     },
     reducers: {
+        HandleChangePriceRange(state, action) {
+            state.priceRange = {
+                ...action.payload.filterAndSort.priceRange,
+                [action.payload.inputName]: action.payload.value
+            }
+        },
         OpenCategoryFilter(state) {
             state.filter = {
                 isActive: !state.filter.isActive,

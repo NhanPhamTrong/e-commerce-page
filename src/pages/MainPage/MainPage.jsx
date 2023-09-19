@@ -7,6 +7,7 @@ export const MainPage = ({
         isMobileSize,
         filterAndSort,
         productList,
+        HandleChangePriceRange,
         FilterByRange,
         OpenCategoryFilter,
         GetFilter,
@@ -24,6 +25,7 @@ export const MainPage = ({
                     isMobileSize={isMobileSize}
                     productList={productList}
                     filterAndSort={filterAndSort}
+                    HandleChangePriceRange={HandleChangePriceRange}
                     FilterByRange={FilterByRange}
                     OpenCategoryFilter={OpenCategoryFilter}
                     GetFilter={GetFilter}
