@@ -1,3 +1,5 @@
+import "./LogInPage.scss"
+
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 
@@ -21,9 +23,7 @@ export const LogInPage = ({ HandleCallbackResponse }) => {
     return (
         <div id="log-in-page">
             <div className="log-in-section">
-                <div id="log-in-button">
-                    <div id="sign-in-div"></div>
-                </div>
+                <div id="sign-in-div"></div>
             </div>
             <Link to="/"> Go back to home page</Link>
         </div>

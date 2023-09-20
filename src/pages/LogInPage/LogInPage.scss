@@ -1,0 +1,14 @@
+@import "../../assets/global-styles/global-styles";
+
+#log-in-page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        margin-top: 1rem;
+    }
+}
