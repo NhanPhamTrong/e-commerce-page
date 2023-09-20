@@ -8,7 +8,7 @@ export const fetchProductList = createAsyncThunk("fetchProducts", async () => {
 export const ProductListSlice = createSlice({
     name: "is active",
     initialState: {
-        isLoading: false,
+        isLoading: true,
         isError: false,
         list: []
     },

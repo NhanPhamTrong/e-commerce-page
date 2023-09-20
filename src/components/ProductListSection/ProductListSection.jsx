@@ -4,12 +4,17 @@ import { motion, AnimatePresence } from "framer-motion"
 export const ProductListSection = ({ productList }) => {
     return (
         <AnimatePresence>
-            {productList.list && (
+            {productList.isLoading ? (
+                <div className="loading">
+                    <div className="spinner"></div>
+                    <p>Loading</p>
+                </div>
+            ) : (
                 <motion.ul
                     id="product-list-section"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6, duration: 0.4 }}>
+                    transition={{ duration: 0.4 }}>
                     {productList.list.filter(product => product.isInPriceRange && product.isChosenCategory).map((product, index) => (
                         <li key={index}>
                             <div className="image">
