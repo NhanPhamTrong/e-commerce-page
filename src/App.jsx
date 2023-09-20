@@ -49,11 +49,11 @@ export const App = () => {
             filterAndSort: filterAndSort
         }))
         dispatch(productListSliceActions.FilterByRange({
-            value: {
+            priceRange: {
                 ...filterAndSort.priceRange,
                 [e.target.name]: e.target.value
             },
-            currentList: productList.list
+            productList: productList.list
         }))
     }
 
@@ -65,7 +65,7 @@ export const App = () => {
         dispatch(filterAndSortActions.GetFilter(e.currentTarget.getAttribute("name")))
         dispatch(productListSliceActions.FilterByCategory({
             name: e.currentTarget.getAttribute("name"),
-            currentList: productList.list
+            productList: productList.list
         }))
     }
 
@@ -77,7 +77,7 @@ export const App = () => {
         dispatch(filterAndSortActions.SortByPopularity(!filterAndSort.isPopularitySort))
         dispatch(productListSliceActions.SortByPopularity({
             filterAndSort: filterAndSort,
-            productList: productList
+            productList: productList.list
         }))
     }
 
@@ -85,7 +85,7 @@ export const App = () => {
         dispatch(filterAndSortActions.SortByPrice(filterAndSort.priceSort))
         dispatch(productListSliceActions.SortByPrice({
             filterAndSort: filterAndSort,
-            productList: productList
+            productList: productList.list
         }))
     }
 
@@ -93,7 +93,7 @@ export const App = () => {
         dispatch(filterAndSortActions.SortByAlphabet(filterAndSort.alphabetSort))
         dispatch(productListSliceActions.SortByAlphabet({
             filterAndSort: filterAndSort,
-            productList: productList
+            productList: productList.list
         }))
     }
 

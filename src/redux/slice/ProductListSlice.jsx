@@ -35,48 +35,45 @@ export const ProductListSlice = createSlice({
     },
     reducers: {
         FilterByRange(state, action) {
-            state.list = action.payload.currentList.map(product => ({
+            const [ priceRange, productList ] = [ action.payload.priceRange, action.payload.productList ]
+            const highestPrice = Math.max(...productList.map(product => product.price))
+            state.list = productList.map(product => ({
                 ...product,
-                isInPriceRange: product.price <= action.payload.value.highest && product.price >= action.payload.value.lowest
+                isInPriceRange: priceRange.lowest !== "" ? (
+                    product.price <= (priceRange.highest === "" ? highestPrice : priceRange.highest) && product.price >= priceRange.lowest
+                ) : (
+                    priceRange.highest !== "" ? product.price <= priceRange.highest && product.price >= 0 : true
+                )
             }))
         },
         FilterByCategory(state, action) {
-            state.list = action.payload.currentList.map(product => {
-                if (action.payload.name === "all") {
-                    return { ...product, isChosenCategory: true }
-                }
-                else {
-                    if (product.category === action.payload.name) {
-                        return { ...product, isChosenCategory: true }
-                    }
-                    else {
-                        return { ...product, isChosenCategory: false }
-                    }
-                }
-            })
+            state.list = action.payload.productList.map(product => ({
+                ...product,
+                isChosenCategory: action.payload.name === "all"  ? true : action.payload.name === product.category
+            }))
         },
         SortByPopularity(state, action) {
-            state.list = !action.payload.filterAndSort.isPopularitySort ?
-                [...action.payload.productList.list].sort((a, b) => b.rating.count - a.rating.count) :
-                [...action.payload.productList.list].sort((a, b) => a.id - b.id)
+            state.list = [...action.payload.productList].sort((a, b) => (
+                action.payload.filterAndSort.isPopularitySort ? (a.id - b.id) : (b.rating.count - a.rating.count)
+            ))
         },
         SortByPrice(state, action) {
-            state.list = [...action.payload.productList.list].sort((a, b) => {
-                return action.payload.filterAndSort.priceSort.isActive ? (
+            state.list = [...action.payload.productList].sort((a, b) => (
+                action.payload.filterAndSort.priceSort.isActive ? (
                     action.payload.filterAndSort.priceSort.isAscending ? (b.price - a.price) : (a.id - b.id)
                 ) : (
                     a.price - b.price
                 )
-            })
+            ))
         },
         SortByAlphabet(state, action) {
-            state.list = [...action.payload.productList.list].sort((a, b) => {
-                return action.payload.filterAndSort.alphabetSort.isActive ? (
+            state.list = [...action.payload.productList].sort((a, b) => (
+                action.payload.filterAndSort.alphabetSort.isActive ? (
                     action.payload.filterAndSort.alphabetSort.isAscending ? (a.title > b.title ? -1 : 1) : (a.id - b.id)
                 ) : (
                     a.title > b.title ? 1 : -1
                 )
-            })
+            ))
         }
     }
 })
