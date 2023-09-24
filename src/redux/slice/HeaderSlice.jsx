@@ -3,23 +3,23 @@ import { createSlice } from "@reduxjs/toolkit"
 export const HeaderSlice = createSlice({
     name: "header",
     initialState: {
-        cartSection: false,
-        accountSection: false
+        isActiveCartSection: false,
+        isActiveAccountSection: false
     },
     reducers: {
-        OpenCartSection(state) {
-            state.cartSection = true
+        OpenCartSection(state, action) {
+            state.isActiveCartSection = !state.isActiveCartSection
         },
         CloseCartSection(state) {
-            state.cartSection = false
+            state.isActiveCartSection = false
         },
-        OpenAccountSection(state) {
-            state.accountSection = true
+        OpenAccountSection(state, action) {
+            state.isActiveAccountSection = !state.isActiveAccountSection
         },
         CloseAccountSection(state) {
-            state.accountSection = false
+            state.isActiveAccountSection = false
         }
     }
 })
 
-export const headerAction = HeaderSlice.actions
+export const headerActions = HeaderSlice.actions

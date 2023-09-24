@@ -52,8 +52,8 @@ export const FilterAndSortSlice = createSlice({
                 name: action.payload
             }
         },
-        OpenSortOption(state, action) {
-            state.isActiveSortOptions = !action.payload
+        OpenSortOption(state) {
+            state.isActiveSortOptions = !state.isActiveSortOptions
         },
         CloseSortOption(state) {
             state.isActiveSortOptions = false

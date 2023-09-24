@@ -62,6 +62,7 @@
             background: $surface;
             bottom: 0;
             transform: translateY(100%);
+            transform-origin: top;
         }
     }
 
@@ -83,6 +84,7 @@
             bottom: 0;
             right: 0;
             transform: translateY(100%);
+            transform-origin: top;
 
             li {
                 button {
@@ -127,7 +129,7 @@
 
             button.active {
                 color: $primary;
-                font-weight: 800;
+                font-weight: 700;
             }
         }
 

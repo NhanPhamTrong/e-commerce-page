@@ -5,6 +5,7 @@ header {
     padding: 1rem 2rem;
     background: $primary-gradient;
     display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-row-gap: 1rem;
     align-items: center;
     position: fixed;
@@ -15,6 +16,7 @@ header {
     .logo {
         grid-column: 1;
         grid-row: 1;
+        justify-self: start;
     }
 
     form {
@@ -45,8 +47,12 @@ header {
     .account {
         grid-column: 2;
         grid-row: 1;
+        justify-self: end;
+        min-height: 3rem;
+        border-radius: 10rem;
         display: flex;
-        justify-content: right;
+        align-items: center;
+        position: relative;
 
         .log-in-btn {
             width: max-content;
@@ -57,8 +63,38 @@ header {
             color: $primary;
         }
 
-        ul {
+        .avatar {
+            height: 3rem;
+            width: 3rem;
+            background: green;
+            border-radius: 10rem;
+            transition: 0.2s;
+        }
 
+        .avatar.active {
+            border-radius: 10rem 10rem 0 0;
+        }
+
+        ul {
+            width: max-content;
+            background: $surface;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transform: translateY(100%);
+            transform-origin: top;
+            
+            li {
+                a {
+                    display: block;
+                    padding: 0.5rem 1rem;
+                    color: $on-surface;
+                }
+
+                a:hover {
+                    background: rgba(0, 0, 0, 0.2);
+                }
+            }
         }
     }
 }
@@ -66,17 +102,45 @@ header {
 @media only screen and (min-width: 768px) {
     header {
         padding: 1rem 4rem;
-    }
-}
-
-@media only screen and (min-width: 992px) {
-    header {
         display: flex;
         justify-content: space-between;
         
         form {
             width: 100%;
             margin: 0 1rem;
+        }
+
+        .cart-section {
+            position: relative;
+
+            .cart-btn {
+                height: 3rem;
+                width: 3rem;
+            }
+
+            .product-list {
+                background: $surface;
+                border-radius: 0.5rem;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                transform: translateY(100%);
+
+                ul {
+                    li {
+
+                    }
+                }
+
+                a {
+                    padding: 0.5rem;
+                    border-top: $primary solid 1px;
+                }
+
+                a:hover {
+                    color: $primary-light;
+                }
+            }
         }
     }
 }

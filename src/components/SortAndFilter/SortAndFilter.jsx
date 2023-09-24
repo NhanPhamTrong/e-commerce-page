@@ -1,6 +1,7 @@
 import "./SortAndFilter.scss"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
+import { motion, AnimatePresence } from "framer-motion"
 import { filterAndSortActions } from "../../redux/slice/FilterAndSortSlice"
 
 export const SortAndFilter = ({
@@ -58,20 +59,26 @@ export const SortAndFilter = ({
                 <button className="chosen-option" type="button" onClick={OpenCategoryFilter}>
                     {!filterAndSort.filter.isActive && (filterAndSort.filter.name[0].toUpperCase() + filterAndSort.filter.name.slice(1))}
                 </button>
-                <ul>
+                <AnimatePresence>
                     {filterAndSort.filter.isActive && (
-                        <>
-                            <li>
-                                <button type="button" name="all" onClick={GetFilter}>All</button>
-                            </li>
-                            {categoryList.map((category, index) => (
-                                <li key={index}>
-                                    <button type="button" name={category} onClick={GetFilter}>{category[0].toUpperCase() + category.slice(1)}</button>
-                                </li>
-                            ))}
-                        </>
+                        <motion.ul
+                            initial={{ opacity: 0, rotateX: -45, translateY: "100%" }}
+                            animate={{ opacity: 1, rotateX: 0, translateY: "100%" }}
+                            exit={{ opacity: 0, rotateX: -45, translateY: "100%" }}
+                            transition={{ duration: 0.2 }}>
+                                <>
+                                    <li>
+                                        <button type="button" name="all" onClick={GetFilter}>All</button>
+                                    </li>
+                                    {categoryList.map((category, index) => (
+                                        <li key={index}>
+                                            <button type="button" name={category} onClick={GetFilter}>{category[0].toUpperCase() + category.slice(1)}</button>
+                                        </li>
+                                    ))}
+                                </>
+                        </motion.ul>
                     )}
-                </ul>
+                </AnimatePresence>
             </div>
 
             {isMobileSize ? (
@@ -83,29 +90,35 @@ export const SortAndFilter = ({
                         <button className="sort-btn" type="button" onClick={OpenSortOptions}>
                             <span><i className="fa-solid fa-sort"></i></span>
                         </button>
-                        {filterAndSort.isActiveSortOptions && (
-                            <ul>
-                                <li>
-                                    <button type="button" onClick={SortByPopularity}>Popularity</button>
-                                </li>
-                                <li>
-                                    <button className={filterAndSort.priceSort.isActive ? "active" : ""} type="button" onClick={SortByPrice}>
-                                        Price
-                                        {filterAndSort.priceSort.isActive && (
-                                            <span><i className={"fa-solid fa-arrow-" + (filterAndSort.priceSort.isAscending ? "up" : "down")}></i></span>
-                                        )}
-                                    </button>
-                                </li>
-                                <li>
-                                    <button className={filterAndSort.alphabetSort.isActive ? "active" : ""} type="button" onClick={SortByAlphabet}>
-                                        Alphabet
-                                        {filterAndSort.alphabetSort.isActive && (
-                                            <span><i className={"fa-solid fa-arrow-" + (filterAndSort.alphabetSort.isAscending ? "up" : "down")}></i></span>
-                                        )}
-                                    </button>
-                                </li>
-                            </ul>
-                        )}
+                        <AnimatePresence>
+                            {filterAndSort.isActiveSortOptions && (
+                                <motion.ul
+                                    initial={{ opacity: 0, rotateX: -45, translateY: "100%" }}
+                                    animate={{ opacity: 1, rotateX: 0, translateY: "100%" }}
+                                    exit={{ opacity: 0, rotateX: -45, translateY: "100%" }}
+                                    transition={{ duration: 0.2 }}>
+                                        <li>
+                                            <button type="button" onClick={SortByPopularity}>Popularity</button>
+                                        </li>
+                                        <li>
+                                            <button className={filterAndSort.priceSort.isActive ? "active" : ""} type="button" onClick={SortByPrice}>
+                                                Price
+                                                {filterAndSort.priceSort.isActive && (
+                                                    <span><i className={"fa-solid fa-arrow-" + (filterAndSort.priceSort.isAscending ? "up" : "down")}></i></span>
+                                                )}
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button className={filterAndSort.alphabetSort.isActive ? "active" : ""} type="button" onClick={SortByAlphabet}>
+                                                Alphabet
+                                                {filterAndSort.alphabetSort.isActive && (
+                                                    <span><i className={"fa-solid fa-arrow-" + (filterAndSort.alphabetSort.isAscending ? "up" : "down")}></i></span>
+                                                )}
+                                            </button>
+                                        </li>
+                                </motion.ul>
+                            )}
+                        </AnimatePresence>
                     </div>
                 </>
             ) : (

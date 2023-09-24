@@ -10,6 +10,7 @@ import { fetchProductList, productListSliceActions } from "./redux/slice/Product
 import { isMobileSizeActions } from "./redux/slice/IsMobileSizeSlice"
 import { filterAndSortActions } from "./redux/slice/FilterAndSortSlice"
 import { userActions } from "./redux/slice/UserSlice"
+import { headerActions } from "./redux/slice/HeaderSlice"
 
 export const App = () => {
     const dispatch = useDispatch()
@@ -37,6 +38,10 @@ export const App = () => {
         window.addEventListener('resize', handleWindowResize)
         return () => window.removeEventListener('resize', handleWindowResize)
     })
+
+    const OpenAccountSection = () => {
+        dispatch(headerActions.OpenAccountSection())
+    }
 
     const HandleSignOut = () => {
         dispatch(userActions.LogOut())
@@ -70,7 +75,7 @@ export const App = () => {
     }
 
     const OpenSortOptions = () => {
-        dispatch(filterAndSortActions.OpenSortOption(filterAndSort.isActiveSortOptions))
+        dispatch(filterAndSortActions.OpenSortOption())
     }
 
     const SortByPopularity = () => {
@@ -105,11 +110,13 @@ export const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route index element={<MainPage
+                    header={header}
                     user={user}
                     isMobileSize={isMobileSize}
                     filterAndSort={filterAndSort}
                     productList={productList}
                     HandleSignOut={HandleSignOut}
+                    OpenAccountSection={OpenAccountSection}
                     HandleChangePriceRange={HandleChangePriceRange}
                     OpenCategoryFilter={OpenCategoryFilter}
                     GetFilter={GetFilter}

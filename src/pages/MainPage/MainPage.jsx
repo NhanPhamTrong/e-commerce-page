@@ -3,10 +3,12 @@ import { SortAndFilter } from "../../components/SortAndFilter/SortAndFilter"
 import { ProductListSection } from "../../components/ProductListSection/ProductListSection"
 
 export const MainPage = ({
+        header,
         user,
         isMobileSize,
         filterAndSort,
         productList,
+        OpenAccountSection,
         HandleSignOut,
         HandleChangePriceRange,
         FilterByRange,
@@ -19,9 +21,12 @@ export const MainPage = ({
     return (
         <div id="main-page">
             <Header
+                header={header}
                 user={user}
-                isMobileSize={isMobileSize} />
-            <main style={{ paddingTop: "128px" }}>
+                isMobileSize={isMobileSize}
+                OpenAccountSection={OpenAccountSection}
+                HandleSignOut={HandleSignOut} />
+            <main style={{ paddingTop: "144px" }}>
                 <SortAndFilter
                     isMobileSize={isMobileSize}
                     productList={productList}
