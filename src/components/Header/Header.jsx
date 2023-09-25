@@ -66,20 +66,22 @@ export const Header = ({ user, isMobileSize, header, OpenAccountSection, HandleS
                                 <button className="cart-btn" type="button">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </button>
-                                {header.isActiveCartSection && (
-                                    <motion.div className="product-list"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 0.2 }}>
-                                        <ul>
-                                            <li></li>
-                                        </ul>
-                                        <Link to="/full-cart">View full cart</Link>
-                                    </motion.div>
-                                )}
+                                <AnimatePresence>
+                                    {header.isActiveCartSection && (
+                                        <motion.div className="product-list"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 0.2 }}>
+                                            <ul>
+                                                <li></li>
+                                            </ul>
+                                            <Link to="/full-cart">View full cart</Link>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                             <div className="account">
-                                <button className={"avatar " + header.isActiveAccountSection ? "active" : ""} onClick={OpenAccountSection}></button>
+                                <button className={"avatar " + (header.isActiveAccountSection ? "active" : "")} onClick={OpenAccountSection}></button>
                                 <AnimatePresence>
                                     {header.isActiveAccountSection && (
                                         <motion.ul

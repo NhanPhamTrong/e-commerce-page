@@ -26,7 +26,7 @@ export const MainPage = ({
                 isMobileSize={isMobileSize}
                 OpenAccountSection={OpenAccountSection}
                 HandleSignOut={HandleSignOut} />
-            <main style={{ paddingTop: "144px" }}>
+            <main style={{ paddingTop: isMobileSize ? 128 : 80 }}>
                 <SortAndFilter
                     isMobileSize={isMobileSize}
                     productList={productList}

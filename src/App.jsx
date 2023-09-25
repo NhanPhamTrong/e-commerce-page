@@ -127,7 +127,9 @@ export const App = () => {
                 <Route path="log-in" element={<LogInPage
                     HandleCallbackResponse={HandleCallbackResponse} />} />
                 <Route path="full-cart" element={<FullCartPage />} />
-                <Route path="*" element={<ProductPage />} />
+                <Route path="*" element={<ProductPage
+                    isMobileSize={isMobileSize}
+                    productList={productList} />} />
             </Routes>
         </BrowserRouter>
     )

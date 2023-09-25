@@ -48,7 +48,6 @@ header {
         grid-column: 2;
         grid-row: 1;
         justify-self: end;
-        min-height: 3rem;
         border-radius: 10rem;
         display: flex;
         align-items: center;
@@ -141,6 +140,10 @@ header {
                     color: $primary-light;
                 }
             }
+        }
+
+        .account {
+            margin-left: 1rem;
         }
     }
 }
