@@ -9,7 +9,11 @@ export const MainPage = ({
         filterAndSort,
         productList,
         OpenAccountSection,
+        OpenCartSection,
         HandleSignOut,
+        SubtractAmountInCart,
+        AddAmountInCart,
+        DeleteItemInCart,
         HandleChangePriceRange,
         FilterByRange,
         OpenCategoryFilter,
@@ -24,8 +28,13 @@ export const MainPage = ({
                 header={header}
                 user={user}
                 isMobileSize={isMobileSize}
+                productList={productList}
                 OpenAccountSection={OpenAccountSection}
-                HandleSignOut={HandleSignOut} />
+                OpenCartSection={OpenCartSection}
+                HandleSignOut={HandleSignOut}
+                SubtractAmountInCart={SubtractAmountInCart}
+                AddAmountInCart={AddAmountInCart}
+                DeleteItemInCart={DeleteItemInCart} />
             <main style={{ paddingTop: isMobileSize ? 128 : 80 }}>
                 <SortAndFilter
                     isMobileSize={isMobileSize}

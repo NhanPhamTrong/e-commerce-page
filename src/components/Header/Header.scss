@@ -115,9 +115,11 @@ header {
             .cart-btn {
                 height: 3rem;
                 width: 3rem;
+                font-size: 1.5rem;
             }
 
             .product-list {
+                width: 24rem;
                 background: $surface;
                 border-radius: 0.5rem;
                 position: absolute;
@@ -127,17 +129,71 @@ header {
 
                 ul {
                     li {
+                        height: 6rem;
+                        display: flex;
+                        justify-content: space-between;
 
+                        img {
+                            height: 6rem;
+                            width: 6rem;
+                        }
+
+                        .content {
+                            margin: 0 0.5rem;
+
+                            p.title {
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: no-wrap;
+                            }
+
+                            .amount-and-price {
+                                display: flex;
+
+                                .amount {
+                                    display: flex;
+
+                                    button {
+
+                                    }
+
+                                    p {
+
+                                    }
+                                }
+
+                                .price {
+                                    margin-left: 0.25rem;
+                                }
+                            }
+                        }
+
+                        .delete-btn {
+                            height: 100%;
+                            width: 2rem;
+                        }
                     }
                 }
 
+                ul.no-item {
+                    height: 8rem;
+                    width: 100%;
+                    color: rgba(0, 0, 0, 0.4);
+                    line-height: 8rem;
+                    text-align: center;
+                }
+
                 a {
-                    padding: 0.5rem;
+                    padding: 1rem;
                     border-top: $primary solid 1px;
+                    color: $on-surface;
+                    display: block;
+                    text-align: center;
                 }
 
                 a:hover {
                     color: $primary-light;
+                    font-weight: 700;
                 }
             }
         }

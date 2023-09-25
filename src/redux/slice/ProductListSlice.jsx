@@ -34,6 +34,38 @@ export const ProductListSlice = createSlice({
         })
     },
     reducers: {
+        AddItemToCart(state, action) {
+            state.list = action.payload.productList.map(product => (
+                {...product, inCart: {
+                    isInCart: product.id === action.payload.id ? true : product.inCart.isInCart,
+                    amount: product.id === action.payload.id ? 1 : product.inCart.amount
+                }}
+            ))
+        },
+        SubtractAmountInCart(state, action) {
+            state.list = action.payload.productList.map(product => (
+                {...product, inCart: {
+                    ...product.inCart,
+                    amount: product.inCart.amount - 1
+                }}
+            ))
+        },
+        AddAmountInCart(state, action) {
+            state.list = action.payload.productList.map(product => (
+                {...product, inCart: {
+                    ...product.inCart,
+                    amount: product.inCart.amount + 1
+                }}
+            ))
+        },
+        DeleteItemInCart(state, action) {
+            state.list = action.payload.productList.map(product => (
+                {...product, inCart: {
+                    isInCart: product.id === action.payload.id ? false : product.inCart.isInCart,
+                    amount: product.id === action.payload.id ? 0 : product.inCart.amount
+                }}
+            ))
+        },
         FilterByRange(state, action) {
             const [ priceRange, productList ] = [ action.payload.priceRange, action.payload.productList ]
             const highestPrice = Math.max(...productList.map(product => product.price))

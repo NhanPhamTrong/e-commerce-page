@@ -5,13 +5,33 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { headerActions } from "../../redux/slice/HeaderSlice"
 
-export const Header = ({ user, isMobileSize, header, OpenAccountSection, HandleSignOut }) => {
+export const Header = ({
+    user,
+    isMobileSize,
+    header,
+    productList,
+    OpenCartSection,
+    OpenAccountSection,
+    HandleSignOut,
+    SubtractAmountInCart,
+    AddAmountInCart,
+    DeleteItemInCart
+}) => {
     const dispatch = useDispatch()
+    const productListInCart = productList.list.filter(product => product.inCart.isInCart)
+
+    console.log(productListInCart)
 
     const HandleClickOutside = (e) => {
         if (e.target.nodeName !== "HTML") {
             if (!e.target.classList.contains("avatar") && e.target.closest("div").classList.contains("account") === false) {
                 dispatch(headerActions.CloseAccountSection())
+            }
+        }
+
+        if (e.target.nodeName !== "HTML") {
+            if (!e.target.classList.contains("cart-btn") && e.target.closest("div").classList.contains("cart-section") === false) {
+                dispatch(headerActions.CloseCartSection())
             }
         }
     }
@@ -42,9 +62,9 @@ export const Header = ({ user, isMobileSize, header, OpenAccountSection, HandleS
                                 <button className={"avatar " + (header.isActiveAccountSection ? "active" : "")} onClick={OpenAccountSection}></button>
                                 {header.isActiveAccountSection && (
                                     <motion.ul
-                                        initial={{ opacity: 0, rotateX: -45, translateY: "100%" }}
+                                        initial={{ opacity: 0, rotateX: -30, translateY: "100%" }}
                                         animate={{ opacity: 1, rotateX: 0, translateY: "100%" }}
-                                        exit={{ opacity: 0, rotateX: -45, translateY: "100%" }}
+                                        exit={{ opacity: 0, rotateX: -30, translateY: "100%" }}
                                         transition={{ delay: 0.1, duration: 0.2 }}>
                                             <li>
                                                 <Link to="/full-cart">
@@ -63,19 +83,46 @@ export const Header = ({ user, isMobileSize, header, OpenAccountSection, HandleS
                     ) : (
                         <>
                             <div className="cart-section">
-                                <button className="cart-btn" type="button">
-                                    <i class="fa-solid fa-cart-shopping"></i>
+                                <button className="cart-btn" type="button" onClick={OpenCartSection}>
+                                    <i className="fa-solid fa-cart-shopping"></i>
                                 </button>
                                 <AnimatePresence>
                                     {header.isActiveCartSection && (
                                         <motion.div className="product-list"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
+                                            initial={{ opacity: 0, rotateX: -30, translateY: "100%" }}
+                                            animate={{ opacity: 1, rotateX: 0, translateY: "100%" }}
+                                            exit={{ opacity: 0, rotateX: -30, translateY: "100%" }}
                                             transition={{ duration: 0.2 }}>
-                                            <ul>
-                                                <li></li>
-                                            </ul>
-                                            <Link to="/full-cart">View full cart</Link>
+                                                <ul className={productListInCart.length > 0 ? "" : "no-item"}>
+                                                    {productListInCart.length > 0 ? (
+                                                        productListInCart.map((product, index) => (
+                                                            <li key={index}>
+                                                                <img src={product.image} alt={product.title} />
+                                                                <div className="content">
+                                                                    <p className="title">{product.title}</p>
+                                                                    <div className="amount-and-price">
+                                                                        <div className="amount">
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => SubtractAmountInCart(product.id)}
+                                                                                disabled={product.inCart.amount === 1 ? "true" : "false"}>-</button>
+                                                                            <p>{product.inCart.amount}</p>
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => AddAmountInCart(product.id)}>+</button>
+                                                                        </div>
+                                                                        <p className="price">{"$" + (product.inCart.amount * parseInt(product.price))}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <button className="delete-btn" type="button" onClick={() => DeleteItemInCart(product.id)}></button>
+                                                            </li>
+                                                    ))) : (
+                                                        <div>
+                                                            No item in your cart
+                                                        </div>
+                                                    )}
+                                                </ul>
+                                                <Link to="/full-cart">View full cart</Link>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>

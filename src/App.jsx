@@ -47,6 +47,38 @@ export const App = () => {
         dispatch(userActions.LogOut())
     }
 
+    const OpenCartSection = () => {
+        dispatch(headerActions.OpenCartSection())
+    }
+
+    const AddItemToCart = (productId) => {
+        dispatch(productListSliceActions.AddItemToCart({
+            id: productId,
+            productList: productList.list
+        }))
+    }
+
+    const SubtractAmountInCart = (productId) => {
+        dispatch(productListSliceActions.SubtractAmountInCart({
+            id: productId,
+            productList: productList.list
+        }))
+    }
+
+    const AddAmountInCart = (productId) => {
+        dispatch(productListSliceActions.AddAmountInCart({
+            id: productId,
+            productList: productList.list
+        }))
+    }
+
+    const DeleteItemInCart = (productId) => {
+        dispatch(productListSliceActions.DeleteItemInCart({
+            id: productId,
+            productList: productList.list
+        }))
+    }
+
     const HandleChangePriceRange = (e) => {
         dispatch(filterAndSortActions.HandleChangePriceRange({
             inputName: e.target.name,
@@ -117,6 +149,10 @@ export const App = () => {
                     productList={productList}
                     HandleSignOut={HandleSignOut}
                     OpenAccountSection={OpenAccountSection}
+                    OpenCartSection={OpenCartSection}
+                    SubtractAmountInCart={SubtractAmountInCart}
+                    AddAmountInCart={AddAmountInCart}
+                    DeleteItemInCart={DeleteItemInCart}
                     HandleChangePriceRange={HandleChangePriceRange}
                     OpenCategoryFilter={OpenCategoryFilter}
                     GetFilter={GetFilter}
